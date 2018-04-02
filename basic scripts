@@ -1,0 +1,300 @@
+>>>REVERSE A STRING<<<
+
+function reverseString(str) {
+  var stringArray = str.split("");
+  stringArray=stringArray.reverse();
+  str=stringArray.join("");
+  return str;
+}
+
+reverseString("hello");
+
+
+>>>FACTORIALIZE A NUMBER<<<
+
+function factorialize(num) {
+ var factArray=[]; 
+  if (num==0){
+    return 1;
+  }
+  else{
+   for(var n=num;n>0;n--){
+     factArray.push(n);
+   }
+   num=factArray.reduce(function(val1,val2){
+     return val1*val2;
+   });
+   return num;
+  }  
+}
+
+factorialize(15);
+
+
+>>>CHECK FOR PALINDROMES<<<
+
+function palindrome(str) {
+  
+  var strCheckOne=str.toLowerCase();  //lower case
+  
+  strCheckOne=strCheckOne.replace(/[^0-9a-z]/g,""); //kill specials
+  
+  var stringArray = strCheckOne.split("");  //reverse function
+  stringArray=stringArray.reverse();
+  var strCheckTwo=stringArray.join("");
+  
+  if (strCheckOne==strCheckTwo){
+    return true;
+  }
+  else {
+    return false; 
+  }
+}
+
+palindrome("2_A3*3#A2");
+
+
+>>>FIND THE LONGEST WORD IN A STRING<<<
+
+function findLongestWord(str) {
+  
+  var strArray = str.split(" "); //separate string into an array
+  
+  for (i=0;i<strArray.length;i++){    //turns every string in the array into it's length
+      strArray[i]=strArray[i].length;
+  }
+  
+  strArray.sort(function(a, b) {  //sorts the lengths from shortest to largest
+  return b - a;
+  });
+  
+  return strArray[0];
+}
+
+findLongestWord("What if we try a super-long word such as otorhinolaryngology");
+
+
+>>>TITLE CASE A SENTENCE<<<
+
+function titleCase(str) {
+  str=str.toLowerCase();  // turns the whole string lower case
+  var strArray = str.split(" "); // split the string into an array of words
+     
+  for (i=0;i<strArray.length;i++){     
+   var strArrayCase=strArray[i].split("");//splits each word into an array of characters  
+   strArrayCase[0]=strArrayCase[0].toUpperCase();//turns the first letter to uppercase
+   strArray[i]=strArrayCase.join("");//rejoin the word with the first letter capitalized
+  }
+  
+ str=strArray.join(" ");  //rejoin the full string
+ return str;
+}
+
+titleCase("I'm a little tea pot");
+
+
+>>>RETURN LARGEST NUMBERS IN ARRAYS<<<
+
+function largestOfFour(arr) {
+  
+  for (i=0;i<arr.length;i++){  
+    arr[i].sort(function(a, b) {  //sorts the numbers from smallest to largest
+    return a-b;
+    });
+    arr[i]=arr[i].pop(); //only keeps the last number in the array which is the largest
+  }
+  return arr;
+}
+
+largestOfFour([[4, 5, 1, 3], [13, 27, 18, 26], [32, 35, 37, 39], [1000, 1001, 857, 1]]);
+
+
+>>>CONFIRM THE ENDING<<<
+
+function confirmEnding(str, target) {       // can be done with .substring too
+  var targetLength = target.length;  
+  var strCheck = str.substr(-targetLength); 
+  return strCheck==target;
+}
+
+confirmEnding("Bastian", "n");
+
+
+>>>REPEAT A STRING REPEAT A STRING<<<
+
+function repeatStringNumTimes(str, num) {
+ var strClone=str;   //store string to chain concatenate
+  str="";            //set original string to empty string
+  if(num>0){         //if num is 1 or more, repeat the chain num times
+    for(i=0;i<num;i++){
+      str=str+strClone;  
+    }
+   return str; 
+  }
+  
+  else{             //if num is 0 or less, return the empty string 
+   return str;
+  }
+}
+
+repeatStringNumTimes("abc", 0);
+
+
+>>>TRUNCATE A STRING<<<
+
+function truncateString(str, num) {
+  var strLength = str.length;   // stores length of string
+  if (strLength>num){           // only executes the funcion if the length of the string is higher than the number
+    if(num>3){                  // if the number is higher than 3, the dots count as string length
+      str = str.slice(0,num-3);
+      str = str+"...";
+      return str;
+    }
+    else if(num<=3){            // if the number is equal or less than 3, the dots don't count as string length
+      str = str.slice(0,num);
+      str = str+"...";
+      return str;
+    }
+  }
+  else{                        
+   return str; 
+  }
+}
+truncateString("A-tisket a-tasket A green and yellow basket", 1);
+
+
+>>>CHUNKY MONKEY<<<
+
+function chunkArrayInGroups(arr, size) {
+  var arrLength = arr.length;
+  var x = size;                  
+  var arrFinal = [];
+  
+  for(y=0;y<arrLength;y=y+size){      // repeat until y is higher than the length of the array
+   var arrPiece = arr.slice(0+y,0+x); // cuts and stores an array (0+y=from where, 0+x to where)
+   arrFinal.push(arrPiece);           // stores the piece of the array as an element of an array    
+   x=x+size;  
+  }
+  
+  return arrFinal;
+}
+
+chunkArrayInGroups(["a", "b", "c", "d"], 2);
+
+
+>>>SLASHER FLICK<<<
+
+function slasher(arr, howMany) {
+  var arrSlashed=arr.slice(howMany);  // kills all elements of the array up to the element stored in howMany
+  return arrSlashed;
+}
+
+slasher([1, 2, 3], 2);
+
+
+>>>MUTATIONS<<<
+
+function mutation(arr) {
+  arr[0]=arr[0].toLowerCase();  // turns both strings into lower case
+  arr[1]=arr[1].toLowerCase();  // so it's not case sensitive
+  var arrSplit = arr[1].split("");  // split string two to check letters 1 by 1
+  for(i=0;i<arrSplit.length;i++){   // if any of the letter don't match return false
+    var matchCheck=arr[0].indexOf(arrSplit[i]);
+    if(matchCheck==-1){
+      return false;
+    }
+  }
+  return true; // if all letters match return true
+}
+
+mutation(["hello", "hey"]);
+
+
+>>>FALSY BOUNCER<<<
+
+function bouncer(arr) {
+  arr=arr.filter(Boolean);
+  return arr;
+}
+
+bouncer([NaN]);
+
+
+>>>SEEK AND DESTROY<<<
+
+function destroyer(arr) {
+  var argLength=arguments.length; //stores argument length
+  var argArray=[];                //creates an empty array
+  
+  for(i=1;i<argLength;i++){   //turns the arguments we want to remove into an array
+    argArray.push(arguments[i]); 
+  }
+ 
+  function atkCheck(val){  //Checks if the value has to be removed or not
+    var muchLeft=argArray.indexOf(val);
+    if (muchLeft==-1){
+      return true;
+    }
+    else{
+      return false;
+    }
+  }
+  
+  var arrArg=arguments[0];  //stores first argument as an array
+  arr=arrArg.filter(atkCheck); //uses atkCheck to remove the values
+  return arr;
+}
+  
+  
+destroyer([1, 2, 3, 1, 2, 3], 2, 3);
+
+
+>>>WHERE DO I BELONG<<<
+
+function getIndexToIns(arr, num) {
+ 
+  var place=0;       //variable for future use
+  arr.sort(function(a, b) {   //sorts array from low to high
+  return a - b;
+  });
+  
+  for(i=0;i<arr.length;i++){   //check each space to see where the num fits
+    if(num>arr[i]){    //if num is higher than the number, num tries the next one
+      place++;         //place stores the next space before trying again
+    }
+    else if(num<arr[i]){  //if num is lower then current space is the correct one
+      return place;
+    }
+  }
+  return place;   //if none match then the last place is the right one
+}
+
+getIndexToIns([2, 5, 10,15,15,20], 15);
+
+
+>>>CAESARS CIPHER<<<
+
+function rot13(str) { 
+  var strSolved="";   //solved cipher gonna go here
+  
+  for (i=0;i<str.length;i++){  //checks all letters one by one
+    var code=str.charCodeAt(i);   //turns letter into unicode to check
+    if(code>64&&code<78){     //solves for letters A to M 
+      code=code+13;
+      code=String.fromCharCode(code);
+      strSolved=strSolved+code;
+    }
+    else if(code>77&&code<91){  //solves for letters N to Z
+      code=code-13;
+      code=String.fromCharCode(code);
+      strSolved=strSolved+code;
+    }
+    else{  //if it's anything else just add it to the solution without solving 
+      code=String.fromCharCode(code);
+      strSolved=strSolved+code;
+    } 
+  }  
+  return strSolved;
+}
+
+rot13("SERR CVMMN!");
